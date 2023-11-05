@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Quiz</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    width: 60%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  h1, h2 {
+    text-align: center;
+  }
+  form {
+    margin-top: 20px;
+  }
+  .question {
+    margin-bottom: 20px;
+  }
+  .question h3 {
+    margin-bottom: 10px;
+  }
+  .btn-submit {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  .btn-submit:hover {
+    background: #555;
+  }
+  #result {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: #333;
+    color: white;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>AI Quiz</h1>
+<form id="quizForm">
+    <div class="question">
+        <h3>1. What is Artificial Intelligence?</h3>
+        <label><input type="radio" name="q1" value="A"> A) The study of how to make computers do things at which, at the moment, people are better.</label><br>
+        <label><input type="radio" name="q1" value="B"> B) The branch of computer science that deals with writing computer programs that can solve problems creatively.</label><br>
+        <label><input type="radio" name="q1" value="C"> C) The intelligence exhibited by machines or software.</label><br>
+        <label><input type="radio" name="q1" value="D"> D) All of the above.</label>
+    </div>
+    <div class="question">
+        <h3>2. Which of the following is not a type of machine learning?</h3>
+        <label><input type="radio" name="q2" value="A"> A) Supervised learning.</label><br>
+        <label><input type="radio" name="q2" value="B"> B) Unsupervised learning.</label><br>
+        <label><input type="radio" name="q2" value="C"> C) Reinforcement learning.</label><br>
+        <label><input type="radio" name="q2" value="D"> D) Compressive learning.</label>
+    </div>
+    <div class="question">
+        <h3>3. Who is known as the father of Artificial Intelligence?</h3>
+        <label><input type="radio" name="q3" value="A"> A) Alan Turing.</label><br>
+        <label><input type="radio" name="q3" value="B"> B) John McCarthy.</label><br>
+        <label><input type="radio" name="q3" value="C"> C) Marvin Minsky.</label><br>
+        <label><input type="radio" name="q3" value="D"> D) Herbert Simon.</label>
+    </div>
+    <div class="question">
+        <h3>4. Which of the following is an example of a neural network's application?</h3>
+        <label><input type="radio" name="q4" value="A"> A) Image recognition.</label><br>
+        <label><input type="radio" name="q4" value="B"> B) Playing chess.</label><br>
+        <label><input type="radio" name="q4" value="C"> C) Predicting weather.</label><br>
+        <label><input type="radio" name="q4" value="D"> D) All of the above.</label>
+    </div>
+    <div class="question">
+        <h3>5. True or False: AI and robotics are the same.</h3>
+        <label><input type="radio" name="q5" value="True"> True</label><br>
+        <label><input type="radio" name="q5" value="False"> False</label>
+    </div>
+    <div class="question">
+        <h3>6. True or False: An algorithm that plays chess cannot play poker.</h3>
+        <label><input type="radio" name="q6" value="True"> True</label><br>
+        <label><input type="radio" name="q6" value="False"> False</label>
+    </div>
+    <button type="submit" class="btn-submit">Submit</button>
+</form>
+<div id="result"></div>
+<script>
+document.getElementById("quizForm").onsubmit = function(event) {
+    event.preventDefault();
+    var score = 0;
+    var feedback = "";
+    var correctAnswers = {"q1": "D", "q2": "D", "q3": "B", "q4": "D", "q5": "False", "q6": "False"};
+    for (var i = 1; i <= 6; i++) {
+        var radios = document.getElementsByName("q" + i);
+        for (var j = 0, length = radios.length; j < length; j++) {
+            if (radios[j].checked) {
+                if(radios[j].value === correctAnswers["q" + i]) {
+                    score++;
+                }
+                break;
+            }
+        }
+    }
+    // Displaying result based on score
+    var resultText = "Your score is: " + score + "/" + 6 + ". ";
+    if (score === 6) {
+        resultText += "Excellent work!";
+    } else if (score >= 4) {
+        resultText += "Good job, but there's room for improvement.";
+    } else {
+        resultText += "Try again, keep learning!";
+    }
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML = resultText;
+}
+</script>
+</div>
+</body>
+</html>
